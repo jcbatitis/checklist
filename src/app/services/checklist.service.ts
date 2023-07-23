@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { ITaskDTO, ITypeDTO } from "../models/checklist";
 
 @Injectable({
@@ -9,8 +9,16 @@ import { ITaskDTO, ITypeDTO } from "../models/checklist";
 })
 export class ChecklistService {
   private baseURL: string = environment.baseURL;
+  public type$: BehaviorSubject<ITypeDTO[]> = new BehaviorSubject<ITypeDTO[]>(
+    []
+  );
+  public tasks: ITaskDTO[];
 
   constructor(private http: HttpClient) {}
+
+  public setTasks(tasks: ITaskDTO[]): void {
+    this.tasks = tasks;
+  }
 
   public getTypes(): Observable<ITypeDTO[]> {
     const url = `${this.baseURL}/Checklist/GetTypes`;

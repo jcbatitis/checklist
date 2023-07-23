@@ -1,7 +1,15 @@
-<mat-chip-listbox aria-label="Types Selection">
-  <mat-chip-option>Apartment</mat-chip-option>
-  <mat-chip-option>University</mat-chip-option>
-  <mat-chip-option color="accent" selected>Work</mat-chip-option>
-  <mat-chip-option color="warn">Personal Belongings</mat-chip-option>
-  <mat-chip-option color="warn">Bills</mat-chip-option>
-</mat-chip-listbox>
+<div class="container">
+  <mat-chip-listbox aria-label="Types Selection">
+    <mat-chip-option *ngFor="let type of types">{{
+      type.name
+    }}</mat-chip-option>
+  </mat-chip-listbox>
+
+  <ng-container *ngIf="types">
+    <ng-container *ngFor="let type of types">
+      <ng-container *ngIf="hasAssociatedTasks(type.api_name)">
+        <app-card [type]="type"></app-card>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

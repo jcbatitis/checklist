@@ -13,6 +13,7 @@ export interface ITaskDTO {
   api_name: string;
   description: string;
   configuration: IConfigurationDTO;
+  value: boolean;
 }
 
 export interface IConfigurationDTO {
